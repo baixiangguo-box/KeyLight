@@ -1,0 +1,138 @@
+"""Generate offline release docs and the audited device catalog (no user data)."""
+import argparse
+import csv
+import html
+import importlib.metadata as metadata
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from kbdrv.models import MODELS
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--output',required=True)
+args = parser.parse_args()
+out = Path(args.output)
+out.mkdir(parents=True,exist_ok=True)
+guide = '''键光 1.7.0 · 使用教程
+发布日期：2026-10-24。适用于 Windows 10（2004 及以上）/11 的 64 位环境；本机 Windows 11 已验证，Windows 10 和 ARM64 未实机验证。
+
+本版重做AI创作流程：直接发送需求自动制作预览，反馈后自行检查与修复，满意后再应用到键盘。
+
+一、先确认键盘型号
+本软件是独立灯光工具，并非狼蛛官方驱动，也不支持狼蛛全系列。
+WIN 60 HE 标准版：已实机验证，有线 USB，已测设备 VID 2E3C / PID C365，协议页 FF1B。
+WIN 68 HE 标准版：代码中有同协议适配逻辑，五行含导航列，但没有本机实物验证，不能保证功能正常。按键映射使用型号专属厂商表。
+WIN 60/68 PRO、MAX、SE、ULTRA，以及 F75/F87/F99、HERO、AG、MINI 等其他系列：当前不支持本软件的灯光推流。相似名称和官方同一驱动入口不代表协议相同。
+识别目录有 127 条外设记录、11 个协议族，含鼠标和接收器，绝不是 127 种键盘都可使用。完整记录见“型号兼容核查.csv”。型号字符串不明确时，WIN 60/68 的同 USB ID 可能无法可靠区分。
+
+二、一键安装
+1. 双击“键光-一键安装-1.7.0-win64.exe”，点击“安装”，完成后打开“键光”。无需安装 Python，也无需管理员权限。启动后首先显示黑白粒子球，球心和文字保持固定；移动鼠标会平滑带动附近的部分粒子，拖出粒子尾迹；粒子密度增加、跟随更及时，移出球面后仍能把附近粒子牵引到更远处；停在球外时保持跟随，鼠标离开窗口或超过牵引范围再自然收回球面；静止时保持球形缓慢自转，触屏可拖动互动；点击任意处或按 Enter/空格即可进入，点击后约1.65秒，球体粒子流向键盘预览并拼出按键，随后接上当前灯光；其他页面或预览在屏幕外时平滑淡入。进入后动画停止并释放资源。系统开启“减少动态效果”时显示静态画面。
+2. 默认安装到 %LOCALAPPDATA%\\Programs\\KeyLight；会创建桌面和开始菜单入口。
+3. 本机已有网页旧版运行时，请先在旧版“设备与关闭设置”中点击“退出服务”。桌面版关闭窗口即保存设置后退出，最小化则继续运行；AI及音频光效关闭时只保存电脑配置，不再把无法板载保存当成报错，退出后动态计算停止。重复打开桌面入口会回到已有窗口。
+4. 将键盘用能传输数据的 USB 线连接电脑，选择有线模式。关闭官方驱动网页及其他灯控软件，避免同时抢占设备。
+5. 软件会显示独立的“键光”桌面窗口，不会打开浏览器。已内置 Python；依赖微软 WebView2 运行组件，Windows 11 通常已自带。缺少时安装包自动联网补齐。安装完成后，普通灯效可离线运行。
+分发版不带任何人的 API Key、预设或聊天记录；旧版作品可先生成分享码，再在新版中导入。
+
+三、调节灯光
+在“控制台”选择灯效，再调整亮度、速度、主色和副色。逐键涂色可以在灯位预览网格上拖动上色。
+涟漪：主色以当前亮度的 20% 铺底；按键产生一圈副色光环，向外扩散并逐渐减弱。长按不会重复触发。
+音频律动：采集系统正在播放的声音，不用麦克风。播放音乐后在右侧“律动方式”选择：
+交错律动——相邻灯位隔一个亮一个，随频段分别起伏，鼓点交换位置。
+按键辐射——按哪个键，就将亮度中心移到该键附近；越远越暗，并随声音变化。静音后变暗。
+音频默认监听启动音频时的系统播放设备；切换耳机/扬声器后，可先切到其他灯效再切回音频律动。
+
+四、保存与分享
+调好后点“保存为预设”；在“我的预设”中选中作品，可以保存修改、仅应用、重命名或删除。
+分享：点“分享当前”，或预设详情“分享预设”、AI 当前作品“分享作品”，再点“复制分享码”。复制受限时，文本会被选中，按 Ctrl+C 即可。
+接收：点“导入分享码”→粘贴整段 KEYLIGHT1. 分享码→“解析分享码”→查看预览→“仅保存”或“保存并应用”。同名会自动另起名字，不会覆盖。
+分享码离线包含配色、速度、亮度、律动方式、逐键涂色或 AI 表达式，不包含接口设置和聊天记录。同布局键盘可还原；不跨电脑同步动画进度，声音与按键效果随对方输入变化。
+
+五、AI 创作
+控制台点“AI 光效”进入创作，打开页面或选择作品都不会改变当前灯光。
+在“接口设置”保存接口地址、模型和 API Key，然后直接发送想法。明确需求自动生成可试用的草稿；先讨论、询问或需要澄清时，模型会正常回复。无需另点生成。
+例：“平时全黑，按哪个键只亮哪个键的主色，按住一直亮，松开后十秒熄灭，不扩散，重复按下重新计时。”接着说“改成两秒，主色白色，其他不变”。请区分按下起计时与松开起计时。
+右侧是草稿预览。点击灯位或试按指定键；点“模拟音乐”检查声音响应，不发声。预览使用与实体灯光相同的渲染引擎，但模拟输入不会发送到键盘。
+看见哪里不对，直接在对话里说明。发送时会将当前草稿、模拟输入的实际灯色及上一轮失败候选交给所配置模型，软件负责自动检查、重试与复查需求，不用复制报错找开发者。自动检查仍不能保证任意想法都成功。
+草稿的主副色、速度和亮度可以手调，后续对话会收到这些真实参数。速度缩放动画与按键计时。
+“应用到键盘”保存并采用草稿；“保存作品”仅收藏。“我的AI光效”提供“编辑预览”“改名”“删除”，删除副本不会熄灭正在使用的灯光。覆盖或删除前确认。
+“停止本轮”立即阻止本轮结果覆盖草稿；正在等待的网络请求可能稍后结束。“新作品”停止本轮并从空白开始，实体灯光保持。可撤回最近8次AI生成，重开保留草稿和对话。失败也会保留草稿及诊断，可继续反馈或重试。
+正常讨论一轮为1次接口请求，正常生成约3次，格式修正、重试和复查会增加请求，每轮最多10次；费用由所选服务决定。预算与超时限制可能中止本轮，已有草稿仍保留。
+对话、草稿和检查记录保存在本机；调用时会发送近期对话、草稿和模拟预览给你配置的接口。API Key用于认证，不放入创作内容或分享码。系统不会为反馈上传全局按键历史。
+新作从零编写安全的逐灯位程序，不套内置涟漪。旧作品保留兼容。自定义动态灯光需要软件运行，不能自由写入键盘固件。
+本版按用户授权用真实配置模型实测四类创作、连续修改与普通讨论，并独立重绘检查灯位/时序/音频。其余异常路径另用模型替身验证；没有宣称任意需求或其他模型均成功。
+
+五点一、按键—灯位自检与校准
+本版修复物理按键错位：WIN60使用61键厂商表，WIN68使用68键厂商表；两者都是五行，WIN68额外导航键位不套用60表。扫描码与扩展标志优先识别物理位置，不受普通字符VK变化影响。A=LED68、B=LED94、空格=LED116，编号从0开始。
+在顶部点“按键—灯位自检”，按实体键即可看到原始VK、扫描码、物理code和映射目标。开启“单键点亮测试”临时只亮按住的键，关闭自检恢复当前光效，不修改作品参数；五分钟自动结束。
+“最近成功发送帧中亮起的编号”是软件写入记录，是否对应正确键帽仍需目视核对。若个别键不同，展开逐键校准，选物理键，试亮编号确认后保存；目标已占用时交换两键。校准按型号保存到本机keymap_calibration.json，不进入分享，不改变固件键位功能；可恢复厂商表。
+Fn由固件处理，无独立Windows键码，不能由普通系统按键监听触发。WIN60没有独立F区/方向区/小键盘；WIN68包含导航键而无独立F区/小键盘。未知87/104等型号不使用猜测映射。系统钩子可能看到其他键盘的输入，请在目标键盘上逐键实按核对。本版做了完整两表与假设备逻辑验证，物理逐键观感需用户验收。
+
+六、退出、备份与卸载
+左下角“设备与关闭设置”默认选择“保存设置后退出”。关闭窗口时会保存支持的内置灯效并读取核对，然后完全结束进程，不留后台或托盘；也可以先点击“保存到键盘”，看到成功提示后关闭。
+WIN60 HE 可保存纯色、呼吸、彩虹、双色波、极光、涟漪、星光的键盘内置版本，以及静态逐键涂色。涟漪使用副色光环和 20% 主色底；速度、亮度按键盘的 5 档取近似值，固件动画可能与软件实时版不同。
+AI、音频律动、扫描、流星、等离子、火焰等软件专属效果不能写成离线动态动画。关闭时正常保存到电脑后退出，重开可恢复作品；退出后软件动态计算停止，键盘使用原先已有的内置设置，不会偷偷把AI光效转成静态或彩虹，也不会留在后台。
+“恢复原来的内置灯效”只退出推流，不覆盖键盘先前的内置设置。本软件新增的板载操作仅写灯光配置和逐键颜色，不升级固件、不改按键映射或磁轴触发设置。
+本机 WIN60 HE 已验证涟漪写入、读取核对及完全退出后保持；断电重插、其他型号和其他内置动画的主观效果尚未逐项验证。
+安装版数据目录：%LOCALAPPDATA%\\KeyLight\\data。备份时先退出服务，再复制该目录；其中的 ai_config.json 可能含个人密钥，请勿发给别人。
+更新安装不覆盖此数据目录。卸载请用系统“设置→应用→安装的应用→键光→卸载”，用户数据默认保留。
+
+七、常见问题
+窗口打不开：重新打开桌面“键光”；确认 8787 端口没有其他程序占用。如有旧版先退出旧服务。若提示缺少 WebView2，连接网络重新运行安装包补齐。
+显示未连接：检查型号是否在支持范围、是否有线连接、USB 线能否传数据；关闭其他驱动和灯控工具后重试。
+预览动、实体不动：预览是最后成功写入的帧，不是硬件接收回执。先确认型号、线缆和独占访问；WIN 68 HE 尚未实测。
+音乐没反应：确认电脑确实通过当前默认扬声器/耳机播放声音，切到其他灯效再切回音频律动；无需打开麦克风。
+键位中心有偏差：当前为 60% ANSI 配列估算，特殊配列、Fn 组合和其他尺寸未做逐键标定。
+启动错误日志：%LOCALAPPDATA%\\KeyLight\\logs\\runtime.log。
+安装包未购买代码签名证书，发布者可能显示未知；文件夹提供 SHA256 校验值。请核对来源与校验值，不要关闭安全软件。
+
+八、兼容核查来源与边界
+核查日：2026-10-22。本项目 kbdrv/models.py、devices.json、adapters.py、input_hook.py 为适配范围依据；当前本机 WIN 60 HE 是唯一实机依据。
+官方型号入口：https://www.aulastar.com/web-drive/
+官方 HUB 型号说明：https://aulastar.com/aula-hub/
+官方设备目录留档来源：https://hub.aulacn.com/ （本次网页访问受限；未将旧目录称为当前完整目录）。
+独立协议研究参考：https://github.com/sgtflixy/AulaControl （仅作为 WIN60HE 公开研究交叉参考，不代表本软件兼容其他型号）。
+本包不包含厂商原始驱动脚本、固件、个人密钥或预设。第三方组件许可见“第三方组件许可.txt”。
+'''
+(out/'先读我.txt').write_text(guide,encoding='utf-8-sig')
+sections = []
+for block in guide.split('\n\n'):
+    lines = block.strip().splitlines()
+    if not lines:
+        continue
+    if lines[0][0] in '一二三四五六七八' and '、' in lines[0]:
+        sections.append('<section><h2>'+html.escape(lines[0])+'</h2><p>'+'<br>'.join(html.escape(x) for x in lines[1:])+'</p></section>')
+    else:
+        sections.append('<p>'+'<br>'.join(html.escape(x) for x in lines)+'</p>')
+document = '''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>键光使用教程</title><style>
+body{margin:0;background:#f5f5f5;color:#252525;font:15px/1.9 "Segoe UI","Microsoft YaHei",sans-serif}main{max-width:940px;margin:auto;padding:50px 24px}header{padding:28px 0;border-bottom:2px solid #111}h1{font-size:38px;letter-spacing:-1px;margin:0}h2{font-size:20px;margin:0 0 16px}section{background:white;border:1px solid #e5e5e5;border-radius:12px;padding:28px;margin:22px 0}p{white-space:normal;overflow-wrap:anywhere}small{color:#777}.tag{display:inline-block;background:#111;color:#fff;border-radius:5px;padding:4px 12px;margin:12px 0}@media print{body{background:white}main{padding:0}section{break-inside:avoid;border:0;padding:14px 0;margin:0}}@media(max-width:600px){main{padding:22px 14px}section{padding:20px}h1{font-size:30px}}
+</style><main><header><small>KEYLIGHT / 1.7.0 / 2026-10-24</small><h1>键光使用教程</h1><span class="tag">一键安装 · 内置运行环境</span><p>先核对型号，再开始调整你的灯光。</p></header>'''+''.join(sections)+'''<footer><small>兼容性结论来自当前软件实现与实际可用硬件；没有将设备识别、写入成功或模拟测试等同于所有型号实机验收。</small></footer></main></html>'''
+(out/'使用教程.html').write_text(document,encoding='utf-8')
+with (out/'型号兼容核查.csv').open('w',encoding='utf-8-sig',newline='') as stream:
+    writer=csv.writer(stream)
+    writer.writerow(['目录记录（含鼠标/接收器）','USB VID','USB PID','协议页','代码适配','实机状态'])
+    for model in MODELS:
+        writer.writerow([model.name,f'{model.vid:04X}',f'{model.pid:04X}',model.family,
+                         '有适配器' if model.supported else '未适配',
+                         'WIN60 HE本机已测' if model.hardware_verified else '未实测'])
+licenses = ['键光 1.7.0 第三方组件许可\nPython、NumPy、PyAudioWPatch、PyInstaller 引导器等组件保留各自许可。\n本软件不是狼蛛官方产品。\n']
+python_license = Path(sys.base_prefix)/'LICENSE.txt'
+if python_license.exists():
+    licenses.append('\n=== Python ===\n'+python_license.read_text(encoding='utf-8'))
+for package in ('numpy','pyaudiowpatch','pyinstaller','psutil','pyyaml','charset-normalizer','pyreadline3','pywin32','pywin32-ctypes',
+                'pywebview','pythonnet','clr_loader','proxy_tools','bottle','cffi','pycparser','typing_extensions','hidapi'):
+    distribution=metadata.distribution(package)
+    for file in distribution.files or []:
+        if Path(str(file)).name.lower().startswith(('license','copying')):
+            path=distribution.locate_file(file)
+            if path.is_file() and path.stat().st_size < 500000:
+                licenses.append(f'\n=== {package} {distribution.version}: {file} ===\n'+path.read_text(encoding='utf-8',errors='replace'))
+    licenses.append(f'\nComponent: {package} {distribution.version}; license metadata: '+str(distribution.metadata.get('License-Expression') or distribution.metadata.get('License') or 'see upstream')+'\n')
+licenses.append('\nMicrosoft WebView2: https://developer.microsoft.com/microsoft-edge/webview2/\n'+
+                '运行组件由 Microsoft 提供并受其许可约束；本安装包仅在系统缺少时调用微软原版安装器。\n')
+(out/'第三方组件许可.txt').write_text('\n'.join(licenses),encoding='utf-8')
+(out/'release-info.json').write_text(json.dumps({'version':'1.7.0','build':'20261024-creator1',
+    'verified_models':['WIN 60 HE'], 'unverified_adapter_models':['WIN 68 HE'],
+    'data_included':False,'api_keys_included':False,'source_date':'2026-10-24'},ensure_ascii=False,indent=2),encoding='utf-8')
+print(out)

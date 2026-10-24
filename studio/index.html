@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#F7F7F7" />
+  <title>键光</title>
+  <style>body.splash-active{background:#060708;overflow:hidden}body.splash-active #workspace{visibility:hidden}#splash{position:fixed;inset:0;z-index:1000;background:#060708;color:#f4f4f4}</style>
+  <link rel="icon" type="image/svg+xml" href="/icon.svg?v=mono1" />
+  <link rel="stylesheet" href="/style.css?v=20261024creator1" />
+</head>
+<body data-view="studio" class="splash-active">
+  <section id="splash" role="button" tabindex="0" aria-label="键光。让灵感，在指尖发光。点击任意处，或按 Enter、空格进入。">
+    <div class="splash-ambient" aria-hidden="true"></div>
+    <canvas id="splash-canvas" aria-hidden="true"></canvas>
+    <div class="splash-wordmark" aria-hidden="true"><span class="splash-eyebrow">KEYLIGHT</span><h1>键光</h1><p>让灵感，在指尖发光。</p></div>
+    <div class="splash-invitation" aria-hidden="true"><span class="splash-enter-mark">↓</span><span>点击任意处进入</span><small>ENTER / 空格</small></div>
+  </section>
+  <div id="workspace" inert aria-hidden="true">
+  <aside class="sidebar">
+    <a class="brand" href="#/studio" aria-label="键光首页">
+      <img src="/icon.svg?v=mono1" alt="" width="36" height="36" />
+      <span><strong>键光</strong><small>键盘灯效工具</small></span>
+    </a>
+    <nav id="tabs" class="tabs" aria-label="主导航">
+      <button class="tab active" data-view="studio"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M7 10h1m4 0h1m4 0h.1M7 14h1m4 0h5"/></svg>控制台</button>
+      <button class="tab" data-view="presets"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg>我的预设</button>
+      <button class="tab" data-view="ai"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Zm7 0v4m-2-2h4"/></svg>AI 创作</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="device">
+        <span class="section-label">当前设备</span>
+        <div class="device-title"><span class="dot" id="dot"></span><span id="device-name">正在连接…</span></div>
+        <code id="device-id"></code>
+      </div>
+      <details class="service-settings">
+        <summary>设备与关闭设置<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></summary>
+        <label for="close-behavior">关闭窗口时</label>
+        <select id="close-behavior"><option value="hold">保存设置后退出</option><option value="release">恢复原来的内置灯效</option></select>
+        <button class="ghost full" id="onboard-save">保存到键盘</button>
+        <p class="hint" id="onboard-hint">内置灯效保存后可独立运行；软件计算的动态效果不能写入键盘。</p>
+        <button class="ghost full" id="release">恢复原生灯效</button>
+        <button class="text-button full" id="shutdown">退出服务</button>
+        <p class="hint">关闭窗口后完全退出，不留后台或托盘。</p>
+      </details>
+      <span class="local-note"><span></span>在本机运行</span>
+    </div>
+  </aside>
+
+  <div class="workspace">
+    <header class="workspace-header">
+      <div><p class="eyebrow">KEYLIGHT</p><h1 id="page-title">控制台</h1><p class="page-description" id="page-description">选择一种灯效，调到刚刚好。</p></div>
+      <div class="header-actions"><button class="ghost" id="keymap-open">按键—灯位自检</button><button class="ghost" id="share-current">分享当前</button><button class="ghost" id="share-open-import">导入分享码</button><button class="primary studio-only" id="save-preset"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>保存为预设</button></div>
+    </header>
+
+    <main id="view-studio" class="view active" aria-label="控制台">
+      <section class="panel stage">
+        <div class="section-head"><div><h2>键盘预览</h2><p class="section-description" id="effect-description">正在获取当前灯效</p></div><span class="badge" id="mode-badge">连接中</span></div>
+        <div class="keyboard-stage"><canvas id="board" width="660" height="180" aria-label="键盘灯位预览，可在逐键涂色时拖动上色"></canvas></div>
+        <div class="preview-caption"><span id="layout-label">灯位网格</span><span id="effect-label">—</span></div>
+        <p class="hint" id="stage-hint">预览显示最近一次成功发送的灯光。</p>
+      </section>
+      <section class="panel effects">
+        <div class="section-head"><h2>选择灯效</h2><span class="quiet-label">14 种效果</span></div>
+        <div class="cards" id="cards" aria-label="灯效"></div>
+      </section>
+      <section class="panel color-panel">
+        <div class="section-head"><h2>调整灯光</h2></div>
+        <div id="audio-style-field" class="audio-style" hidden><label for="audio-style">律动方式</label><select id="audio-style"><option value="staggered">交错律动</option><option value="radial">按键辐射</option></select><p id="audio-style-hint" class="hint"></p></div>
+        <div class="slider-block"><div class="control-caption"><label for="brightness">亮度</label><output id="brightness-out" for="brightness">100%</output></div><input type="range" id="brightness" min="0" max="1" step="0.01" value="1" /></div>
+        <div class="slider-block"><div class="control-caption"><label for="speed">速度</label><output id="speed-out" for="speed">1.00×</output></div><input type="range" id="speed" min="0.05" max="3" step="0.05" value="1" /></div>
+        <div class="divider"></div>
+        <div class="color-field"><label for="hex">主色</label><div class="color-input"><label class="native-color"><span class="swatch" id="swatch"></span><input type="color" id="native-main" value="#FF5A3C" aria-label="选择主色" /></label><input type="text" id="hex" value="#FF5A3C" spellcheck="false" aria-label="主色十六进制值" maxlength="7" /></div></div>
+        <div class="color-field"><label for="hex2">副色</label><div class="color-input"><label class="native-color"><span class="swatch" id="swatch2"></span><input type="color" id="native-secondary" value="#1E7BFF" aria-label="选择副色" /></label><input type="text" id="hex2" value="#1E7BFF" spellcheck="false" aria-label="副色十六进制值" maxlength="7" /></div></div>
+        <div class="swatches" id="swatches" aria-label="常用颜色"></div>
+        <p class="hint">双色波、涟漪等灯效会同时使用两种颜色。</p>
+        <details class="fine-color"><summary>精细调色</summary><div class="wheel-wrap"><canvas id="wheel" width="240" height="240" aria-label="主色色轮"></canvas><canvas id="wheel-cursor" width="240" height="240" aria-hidden="true"></canvas></div><div class="value-row"><label for="value">色彩明度</label><input type="range" id="value" min="0.05" max="1" step="0.01" value="1" /></div></details>
+        <div hidden><span id="mini-swatch"></span><input type="text" id="mini-hex" aria-label="当前主色" /></div>
+      </section>
+    </main>
+
+    <main id="view-presets" class="view" aria-label="我的预设">
+      <section class="panel preset-list">
+        <div class="section-head"><h2>已保存的灯效</h2><button class="ghost small" id="preset-new">保存当前灯效</button></div>
+        <div class="preset-grid" id="preset-grid"></div>
+        <p class="empty-state" id="preset-empty">还没有预设。先在控制台调好灯光，再保存到这里。</p>
+      </section>
+      <section class="panel preset-editor">
+        <div class="section-head"><h2>预设详情</h2><span class="quiet-label">选择后可微调</span></div>
+        <canvas id="preset-thumb" width="640" height="180" aria-label="预设灯光预览"></canvas>
+        <label class="field-label" for="pname">名称</label><input type="text" id="pname" placeholder="选择左侧预设" maxlength="40" />
+        <div class="color-pair">
+          <div class="color-field"><label for="phex">主色</label><div class="color-input"><label class="native-color"><span class="swatch" id="pswatch"></span><input type="color" id="native-preset" value="#FF5A3C" aria-label="选择预设主色" /></label><input type="text" id="phex" spellcheck="false" aria-label="预设主色" maxlength="7" /></div></div>
+          <div class="color-field"><label for="phex2">副色</label><div class="color-input"><label class="native-color"><span class="swatch" id="pswatch2"></span><input type="color" id="native-preset-secondary" value="#1E7BFF" aria-label="选择预设副色" /></label><input type="text" id="phex2" spellcheck="false" aria-label="预设副色" maxlength="7" /></div></div>
+        </div>
+        <div class="slider-block"><div class="control-caption"><label for="pspeed">速度</label><output id="pspeed-out">1.00×</output></div><input type="range" id="pspeed" min="0.05" max="3" step="0.05" value="1" /></div>
+        <div class="slider-block"><div class="control-caption"><label for="pbright">亮度</label><output id="pbright-out">100%</output></div><input type="range" id="pbright" min="0" max="1" step="0.01" value="1" /></div>
+        <details class="fine-color"><summary>精细调色</summary><div class="wheel-wrap"><canvas id="pwheel" width="190" height="190" aria-label="预设色色轮"></canvas><canvas id="pwheel-cursor" width="190" height="190" aria-hidden="true"></canvas></div></details>
+        <div class="stage-actions"><button class="primary" id="p-save-apply">保存并应用</button><button class="ghost" id="p-apply">仅应用</button><button class="ghost" id="p-share">分享预设</button><button class="text-button danger" id="p-delete">删除</button></div>
+        <p class="hint" id="p-status" role="status">选择一套预设，查看它的颜色与参数。</p>
+      </section>
+    </main>
+
+    <main id="view-ai" class="view" aria-label="AI 创作">
+      <section class="panel ai-chat">
+        <div class="section-head"><div><h2>和模型一起创作</h2><p class="section-description">描述、试用、继续修改，AI 会自行检查和修正预览。<span id="ai-chat-model"></span></p></div><div><button class="text-button" id="ai-undo" disabled>撤回上次修改</button><button class="text-button" id="ai-reset">新作品</button></div></div>
+        <div class="chat-log" id="chat-log" aria-live="polite"></div>
+        <textarea id="ai-input" rows="3" aria-label="灯效描述" placeholder="例如：缓慢流动的深蓝色，偶尔掠过一道白光。"></textarea>
+        <div class="ai-suggestions" aria-label="描述示例"><button class="ghost small" data-ai-prompt="平时全黑，按哪个键就只有那个键亮起主色，松开后仍亮十秒再熄灭，不扩散，重复按下重新计时">单键亮起 · 不扩散</button><button class="ghost small" data-ai-prompt="深蓝色暗底，一道柔和白光从左向右缓慢扫过">深蓝底 · 白光掠过</button><button class="ghost small" data-ai-prompt="速度再慢一点，白光柔和一些，背景更暗，其他保持不变">慢一点，柔和一些</button><button class="ghost small" data-ai-prompt="改成灯位交错、分别跟随音乐起伏的音频律动，保持当前配色">自定义音乐灯光</button></div>
+        <div class="ai-actions"><span class="hint" id="ai-status" role="status">这里直接和已配置的 AI 模型交流，明确的需求会自动生成预览，应用前不会改变实体键盘。</span><button class="ghost" id="ai-cancel" hidden>停止本轮</button><button class="primary" id="ai-send">发送<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button></div>
+        <div class="ai-compose-row"><button class="ghost" id="ai-compose" hidden>重新制作预览</button><span class="hint">发送时会附带当前模拟预览结果，方便 AI 继续修改。</span></div>
+        <details class="ai-config"><summary>接口设置</summary><label class="field-label" for="ai-key">API Key</label><input type="password" id="ai-key" placeholder="只保存在本机" spellcheck="false" autocomplete="off" /><label class="field-label" for="ai-base">接口地址</label><input type="text" id="ai-base" placeholder="https://api.deepseek.com" spellcheck="false" /><label class="field-label" for="ai-model">模型</label><input type="text" id="ai-model" placeholder="deepseek-chat" spellcheck="false" /><button class="ghost small" id="ai-save">保存设置</button></details>
+      </section>
+      <section class="panel ai-preview">
+        <div class="section-head"><h2>创作预览</h2><button class="text-button" id="ai-back">返回控制台</button><span class="badge" id="ai-badge">未配置</span></div>
+        <canvas id="ai-canvas" width="640" height="180" aria-label="AI 灯效预览，可点击灯位模拟按键"></canvas><div class="preview-tools"><span class="hint" id="ai-preview-status">实时预览 · 点击灯位试按</span><button class="text-button" id="ai-preview-audio" aria-pressed="false">模拟音乐</button><button class="text-button" id="ai-preview-clear">清空模拟输入</button></div><div class="preview-key-tools"><label for="ai-test-key">试按指定键</label><select id="ai-test-key"><option value="65">A</option><option value="66">B</option><option value="87">W</option><option value="32">空格</option><option value="13">回车</option><option value="160">左 Shift</option></select><button class="ghost small" id="ai-test-press">按住试亮，松开释放</button></div>
+        <p class="ai-intent" id="ai-intent" hidden></p><p class="hint" id="ai-legacy-note" hidden>这是旧版作品，可能仍采用内置效果。点击“新作品”按原要求从零重做；旧作品会保留在作品库。</p><div class="ai-meta" id="ai-meta">生成后，灯效会在这里实时预览。</div>
+        <label class="field-label" for="ai-name">作品名称</label><input type="text" id="ai-name" placeholder="给这束光起个名字" maxlength="40" />
+        <div class="slider-block"><div class="control-caption"><label for="aispeed">速度</label><output id="aispeed-out">1.00×</output></div><input type="range" id="aispeed" min="0.05" max="3" step="0.05" value="1" /></div>
+        <div class="slider-block"><div class="control-caption"><label for="aibright">亮度</label><output id="aibright-out">100%</output></div><input type="range" id="aibright" min="0" max="1" step="0.01" value="1" /></div>
+        <div class="ai-save-row"><button class="primary" id="ai-save-apply">应用到键盘</button><button class="ghost" id="ai-save-effect">保存作品</button><button class="ghost" id="ai-share">分享作品</button></div>
+        <p class="hint">AI 从零编写光效，生成后可继续对话、试按并调整。作品、对话和最近 8 次修改保存在本机；自定义动态灯光需要软件运行。</p>
+        <details class="expression-details" id="ai-diagnostics-wrap" hidden><summary>自动检查记录（可选）</summary><pre id="ai-diagnostics" class="expr"></pre></details><details class="expression-details"><summary>技术详情（可选）</summary><pre class="expr" id="ai-expr"></pre></details>
+
+      </section>
+      <section class="panel ai-colors">
+        <div class="section-head"><h2>调整作品配色</h2><span class="quiet-label">仅修改预览 · 随作品保存</span></div>
+        <p class="hint" id="ai-palette-hint"></p><div class="color-pair">
+          <div class="color-field"><label for="ahex">主色</label><div class="color-input"><label class="native-color"><span class="swatch" id="aswatch"></span><input type="color" id="native-ai" value="#5A8CFF" aria-label="选择 AI 作品主色" /></label><input type="text" id="ahex" spellcheck="false" maxlength="7" aria-label="AI 作品主色" /></div></div>
+          <div class="color-field"><label for="ahex2">副色</label><div class="color-input"><label class="native-color"><span class="swatch" id="aswatch2"></span><input type="color" id="native-ai-secondary" value="#FF5A3C" aria-label="选择 AI 作品副色" /></label><input type="text" id="ahex2" spellcheck="false" maxlength="7" aria-label="AI 作品副色" /></div></div>
+        </div>
+        <div class="swatches" id="aswatches" aria-label="AI 常用参考颜色"></div>
+        <details class="fine-color"><summary>精细调色</summary><div class="wheel-wrap"><canvas id="awheel" width="190" height="190" aria-label="AI 参考色色轮"></canvas><canvas id="awheel-cursor" width="190" height="190" aria-hidden="true"></canvas></div></details>
+      </section>
+      <section class="panel ai-library"><div class="section-head"><div><h2>我的 AI 光效</h2><p class="section-description">选择已保存的作品继续修改，或应用后返回控制台。</p></div></div><div id="custom-list" class="custom-grid"></div></section>
+    </main>
+    <footer><span class="status-mark" aria-hidden="true"></span><span id="status" role="status">正在连接键盘…</span></footer>
+  </div>
+  <dialog id="share-dialog" aria-labelledby="share-title">
+    <div class="section-head"><h2 id="share-title">分享光效</h2><button id="share-close" class="text-button" aria-label="关闭分享窗口">关闭</button></div>
+    <p id="share-intro" class="hint"></p>
+    <label class="field-label" for="share-code">分享码</label><textarea id="share-code" rows="5" maxlength="32000" spellcheck="false" aria-label="光效分享码"></textarea>
+    <div id="share-export-actions" class="stage-actions"><button id="share-copy" class="primary">复制分享码</button></div>
+    <div id="share-import-actions" class="stage-actions" hidden><button id="share-inspect" class="primary">解析分享码</button></div>
+    <section id="share-result" hidden>
+      <label for="share-name" class="field-label">保存名称</label><input id="share-name" type="text" maxlength="40" />
+      <p id="share-summary" class="hint"></p><canvas id="share-preview" width="640" height="180" aria-label="分享光效预览"></canvas>
+      <div class="stage-actions"><button id="share-save-apply" class="primary">保存并应用</button><button id="share-save" class="ghost">仅保存</button></div>
+    </section>
+    <p id="share-status" class="hint" role="status"></p>
+  </dialog>
+  <dialog id="keymap-dialog" aria-labelledby="keymap-title">
+    <div class="section-head"><div><h2 id="keymap-title">按键—灯位对照</h2><p class="section-description" id="keymap-profile"></p></div><button class="text-button" id="keymap-close">关闭自检</button></div>
+    <p class="hint">按一下实体键，查看系统键码、扫描码和目标灯位。请在目标键盘上测试，系统钩子也可能看到其他键盘的输入。这里按厂商逐键表绘制；Fn 是固件层键，不会向 Windows 上报独立键码。</p>
+    <label class="keymap-switch"><input type="checkbox" id="keymap-single" />单键点亮测试：临时熄灭其他灯，只点亮当前按住的键；关闭自检后恢复当前光效。</label>
+    <div id="keymap-board" class="physical-keyboard" aria-label="实际配列与灯位对照"></div>
+    <p id="keymap-event" class="keymap-event" role="status">等待按键…</p><p id="keymap-sent" class="hint"></p>
+    <details class="keymap-calibration"><summary>个别键仍错位？逐键校准</summary>
+      <p class="hint">选择要校准的物理键，逐个试亮灯位编号，确认实际键帽后保存。编号从0开始；如目标已属于其他键，会交换两键的灯位。只修改本机灯光对照，不改变键盘按键功能。</p>
+      <div class="keymap-calibration-fields"><label>校准按键<select id="keymap-key"></select></label><label>正确灯位编号<input type="number" id="keymap-led" min="22" max="131" step="1" value="68" /></label><button class="ghost" id="keymap-probe">点亮此编号 2 秒</button></div>
+      <div class="stage-actions"><button class="primary" id="keymap-save">保存对照校准</button><button class="ghost" id="keymap-reset">恢复厂商逐键表</button></div>
+    </details>
+    <p class="hint" id="keymap-status" role="status">调试只保留最后一次按键，不保存输入记录；五分钟后自动结束。</p>
+  </dialog>
+  </div>
+  <script src="/splash.js?v=20261024creator1"></script>
+  <script src="/app.js?v=20261024creator1"></script>
+</body>
+</html>

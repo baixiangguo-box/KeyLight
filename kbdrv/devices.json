@@ -1,0 +1,1145 @@
+[
+ {
+  "name": "G10 Pro",
+  "vid": 23233,
+  "pid": 8449,
+  "usage": 1,
+  "page": 12,
+  "family": "0x000C",
+  "wireless": false
+ },
+ {
+  "name": "WIN 60 SE",
+  "vid": 14502,
+  "pid": 10522,
+  "usage": 1,
+  "page": 65280,
+  "family": "0xFF00",
+  "wireless": false
+ },
+ {
+  "name": "2.4G Dual Mode Mouse",
+  "vid": 13652,
+  "pid": 64310,
+  "usage": 2,
+  "page": 65282,
+  "family": "0xFF02",
+  "wireless": false
+ },
+ {
+  "name": "2.4G Wireless 8K Receiver",
+  "vid": 13652,
+  "pid": 64309,
+  "usage": 2,
+  "page": 65282,
+  "family": "0xFF02",
+  "wireless": true
+ },
+ {
+  "name": "2.4G Wireless Receiver",
+  "vid": 13652,
+  "pid": 62933,
+  "usage": 2,
+  "page": 65282,
+  "family": "0xFF02",
+  "wireless": true
+ },
+ {
+  "name": "Gaming Mouse",
+  "vid": 13652,
+  "pid": 62737,
+  "usage": 2,
+  "page": 65282,
+  "family": "0xFF02",
+  "wireless": false
+ },
+ {
+  "name": "SAREPO",
+  "vid": 13652,
+  "pid": 62741,
+  "usage": 2,
+  "page": 65282,
+  "family": "0xFF02",
+  "wireless": false
+ },
+ {
+  "name": "SAREPO",
+  "vid": 13652,
+  "pid": 62743,
+  "usage": 2,
+  "page": 65282,
+  "family": "0xFF02",
+  "wireless": true
+ },
+ {
+  "name": "WIN 60 HE",
+  "vid": 11836,
+  "pid": 50021,
+  "usage": 145,
+  "page": 65307,
+  "family": "0xFF1B",
+  "wireless": false
+ },
+ {
+  "name": "WIN 68 HE",
+  "vid": 11836,
+  "pid": 50021,
+  "usage": 145,
+  "page": 65307,
+  "family": "0xFF1B",
+  "wireless": false
+ },
+ {
+  "name": "AULA-8K Dongle",
+  "vid": 12815,
+  "pid": 8864,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": true
+ },
+ {
+  "name": "AULA-V9",
+  "vid": 12815,
+  "pid": 8888,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": false
+ },
+ {
+  "name": "AULA-V9",
+  "vid": 12815,
+  "pid": 8890,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": true
+ },
+ {
+  "name": "AULA-V9+",
+  "vid": 12815,
+  "pid": 8887,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": false
+ },
+ {
+  "name": "AULA-V9+",
+  "vid": 12815,
+  "pid": 8890,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": true
+ },
+ {
+  "name": "AULA-V9Max",
+  "vid": 12815,
+  "pid": 8888,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": false
+ },
+ {
+  "name": "AULA-V9Max+",
+  "vid": 12815,
+  "pid": 8887,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": false
+ },
+ {
+  "name": "AULA-V9Pro",
+  "vid": 12815,
+  "pid": 8888,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": false
+ },
+ {
+  "name": "AULA-V9Pro",
+  "vid": 12815,
+  "pid": 8890,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": true
+ },
+ {
+  "name": "AULA-V9Pro+",
+  "vid": 12815,
+  "pid": 8887,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": false
+ },
+ {
+  "name": "AULA-V9Pro+",
+  "vid": 12815,
+  "pid": 8890,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": true
+ },
+ {
+  "name": "AULA-V9Ultra",
+  "vid": 12815,
+  "pid": 8888,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": false
+ },
+ {
+  "name": "AULA-V9Ultra+",
+  "vid": 12815,
+  "pid": 8887,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": false
+ },
+ {
+  "name": "AULA-V9Ultra+",
+  "vid": 12815,
+  "pid": 8890,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": true
+ },
+ {
+  "name": "AULA-X9",
+  "vid": 12815,
+  "pid": 8886,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": false
+ },
+ {
+  "name": "AULA-X9",
+  "vid": 12815,
+  "pid": 8890,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": true
+ },
+ {
+  "name": "AULA-X9Max",
+  "vid": 12815,
+  "pid": 8886,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": false
+ },
+ {
+  "name": "AULA-X9Pro",
+  "vid": 12815,
+  "pid": 8886,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": false
+ },
+ {
+  "name": "AULA-X9Pro",
+  "vid": 12815,
+  "pid": 8890,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": true
+ },
+ {
+  "name": "AULA-X9Ultra",
+  "vid": 12815,
+  "pid": 8886,
+  "usage": 146,
+  "page": 65308,
+  "family": "0xFF1C",
+  "wireless": false
+ },
+ {
+  "name": "8K Wireless Receiver",
+  "vid": 14126,
+  "pid": 4204,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": true
+ },
+ {
+  "name": "8K Wireless Receiver",
+  "vid": 3141,
+  "pid": 65273,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": true
+ },
+ {
+  "name": "AULA F75 HE Dongle",
+  "vid": 3141,
+  "pid": 65278,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": true
+ },
+ {
+  "name": "AULA HERO 75 HE",
+  "vid": 14126,
+  "pid": 4158,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": false
+ },
+ {
+  "name": "AULA-Neos75",
+  "vid": 7847,
+  "pid": 18564,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": false
+ },
+ {
+  "name": "AULA-Neos75 dongle",
+  "vid": 28006,
+  "pid": 34162,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": true
+ },
+ {
+  "name": "HERO 108",
+  "vid": 14126,
+  "pid": 4158,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": false
+ },
+ {
+  "name": "HERO 68 Air",
+  "vid": 14126,
+  "pid": 4158,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": false
+ },
+ {
+  "name": "HERO 68 HE",
+  "vid": 14126,
+  "pid": 4158,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": false
+ },
+ {
+  "name": "HERO 68 MINI",
+  "vid": 14126,
+  "pid": 4158,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": false
+ },
+ {
+  "name": "HERO 68 XS",
+  "vid": 14126,
+  "pid": 4158,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": false
+ },
+ {
+  "name": "HERO 84 HE",
+  "vid": 14126,
+  "pid": 4158,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": false
+ },
+ {
+  "name": "HERO 87 HE",
+  "vid": 14126,
+  "pid": 4158,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": false
+ },
+ {
+  "name": "HERO 99 HE",
+  "vid": 14126,
+  "pid": 4158,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": false
+ },
+ {
+  "name": "HERO68 MINI Air",
+  "vid": 14126,
+  "pid": 4158,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": false
+ },
+ {
+  "name": "MINI 60 HE PRO Dongle",
+  "vid": 3141,
+  "pid": 65278,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": true
+ },
+ {
+  "name": "MINI 68 HE PRO Dongle",
+  "vid": 3141,
+  "pid": 65278,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": true
+ },
+ {
+  "name": "MINI68HE MAX Dongle",
+  "vid": 3141,
+  "pid": 65276,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": true
+ },
+ {
+  "name": "WIN68HE Ultra",
+  "vid": 14126,
+  "pid": 4158,
+  "usage": 97,
+  "page": 65376,
+  "family": "0xFF60",
+  "wireless": false
+ },
+ {
+  "name": "AULA F108ProV2",
+  "vid": 14502,
+  "pid": 10041,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F108ProV2C",
+  "vid": 14502,
+  "pid": 10042,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F108ProV2C",
+  "vid": 14502,
+  "pid": 10057,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F108ProV2C Dongle",
+  "vid": 3141,
+  "pid": 65276,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": true
+ },
+ {
+  "name": "AULA F75 HE",
+  "vid": 14502,
+  "pid": 10025,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F75 HE",
+  "vid": 14502,
+  "pid": 10070,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F75 HE",
+  "vid": 14502,
+  "pid": 10050,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F75 V2",
+  "vid": 14502,
+  "pid": 10088,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F87ProV2C",
+  "vid": 14502,
+  "pid": 10002,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F87ProV2C",
+  "vid": 14502,
+  "pid": 10040,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F87ProV2C",
+  "vid": 14502,
+  "pid": 10055,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F87ProV2C Dongle",
+  "vid": 3141,
+  "pid": 65276,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": true
+ },
+ {
+  "name": "AULA F87ProV2D",
+  "vid": 14502,
+  "pid": 10001,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F87ProV2D",
+  "vid": 14502,
+  "pid": 10054,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F87ProV2D",
+  "vid": 14502,
+  "pid": 10039,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F87ProV2D Dongle",
+  "vid": 3141,
+  "pid": 65278,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": true
+ },
+ {
+  "name": "AULA F87ProV2Z",
+  "vid": 14502,
+  "pid": 10000,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F87ProV2Z",
+  "vid": 14502,
+  "pid": 10056,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F87ProV2Z",
+  "vid": 14502,
+  "pid": 10038,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA F87S 8K",
+  "vid": 14502,
+  "pid": 10504,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA NOVA75 Pro",
+  "vid": 14502,
+  "pid": 10076,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA NOVA98",
+  "vid": 14502,
+  "pid": 10043,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA NOVA98",
+  "vid": 14502,
+  "pid": 10077,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "Epomaker x Aula F75 V2",
+  "vid": 14502,
+  "pid": 10047,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "F75 Master",
+  "vid": 14502,
+  "pid": 10072,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "MINI 60 HE",
+  "vid": 3141,
+  "pid": 32818,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "MINI 60 HE PRO",
+  "vid": 3141,
+  "pid": 32946,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "MINI 60 HE PRO",
+  "vid": 3141,
+  "pid": 32930,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "MINI 68 HE",
+  "vid": 14502,
+  "pid": 10018,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "MINI 68 HE PRO",
+  "vid": 14502,
+  "pid": 10019,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "MINI60HE MAX",
+  "vid": 3141,
+  "pid": 32929,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "MINI68 HE MAX",
+  "vid": 14502,
+  "pid": 10020,
+  "usage": 97,
+  "page": 65384,
+  "family": "0xFF68",
+  "wireless": false
+ },
+ {
+  "name": "AULA NOVA98 Dongle",
+  "vid": 3141,
+  "pid": 65276,
+  "usage": 113,
+  "page": 65408,
+  "family": "0xFF80",
+  "wireless": true
+ },
+ {
+  "name": "MINI60HE MAX Dongle",
+  "vid": 3141,
+  "pid": 65276,
+  "usage": 1,
+  "page": 65408,
+  "family": "0xFF80",
+  "wireless": true
+ },
+ {
+  "name": "HERO 68 HE ULTRA",
+  "vid": 7333,
+  "pid": 1031,
+  "usage": 1,
+  "page": 65440,
+  "family": "0xFFA0",
+  "wireless": false
+ },
+ {
+  "name": "AULA Receiver",
+  "vid": 14502,
+  "pid": 10489,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": true
+ },
+ {
+  "name": "AULA Receiver",
+  "vid": 14502,
+  "pid": 12058,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": true
+ },
+ {
+  "name": "AULA Receiver",
+  "vid": 14502,
+  "pid": 10493,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": true
+ },
+ {
+  "name": "AULA Receiver",
+  "vid": 14502,
+  "pid": 10473,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": true
+ },
+ {
+  "name": "AULA-L5 Ultra",
+  "vid": 14502,
+  "pid": 12044,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-L9 Mouse",
+  "vid": 14502,
+  "pid": 10487,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-L9 Ultra Mouse",
+  "vid": 14502,
+  "pid": 10491,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-SC800 Max Mouse",
+  "vid": 14502,
+  "pid": 12000,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-SC880MAX",
+  "vid": 14502,
+  "pid": 10471,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-SC880Ultra",
+  "vid": 14502,
+  "pid": 10495,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-SC900V2 MAX",
+  "vid": 14502,
+  "pid": 12022,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-SC900V2 Pro",
+  "vid": 14502,
+  "pid": 12030,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-SC900V2 Ultra Mouse",
+  "vid": 14502,
+  "pid": 12020,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-V9Ultra",
+  "vid": 14502,
+  "pid": 12018,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-V9Ultra+",
+  "vid": 14502,
+  "pid": 12014,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-X5 MAX",
+  "vid": 14502,
+  "pid": 10472,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-X5 Ultra",
+  "vid": 14502,
+  "pid": 12040,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AULA-X9Ultra",
+  "vid": 14502,
+  "pid": 12052,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "V3 Ultra B",
+  "vid": 14412,
+  "pid": 4696,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": true
+ },
+ {
+  "name": "V3 Ultra B",
+  "vid": 14412,
+  "pid": 8802,
+  "usage": 2,
+  "page": 65448,
+  "family": "0xFFA8",
+  "wireless": false
+ },
+ {
+  "name": "AG60",
+  "vid": 14502,
+  "pid": 10448,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG60 MAX",
+  "vid": 14502,
+  "pid": 10450,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG60 MAX",
+  "vid": 14502,
+  "pid": 10461,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG60 PRO",
+  "vid": 14502,
+  "pid": 10449,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG60 PRO",
+  "vid": 14502,
+  "pid": 10460,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG63",
+  "vid": 14502,
+  "pid": 10029,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG63 PRO",
+  "vid": 14502,
+  "pid": 10028,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG63 PRO",
+  "vid": 6790,
+  "pid": 65153,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG75",
+  "vid": 14502,
+  "pid": 10463,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG75",
+  "vid": 14502,
+  "pid": 10480,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG75 PRO",
+  "vid": 14502,
+  "pid": 10464,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG75 PRO",
+  "vid": 14502,
+  "pid": 10481,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG75 Ultra",
+  "vid": 14502,
+  "pid": 10465,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AG75 Ultra",
+  "vid": 14502,
+  "pid": 10482,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AULA 60",
+  "vid": 14502,
+  "pid": 10498,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "AULA 66",
+  "vid": 14502,
+  "pid": 10499,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "BOX 63",
+  "vid": 14502,
+  "pid": 10032,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "BOX 63MAX",
+  "vid": 14502,
+  "pid": 10033,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "BOX 63MAX",
+  "vid": 14502,
+  "pid": 10087,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "F68RX",
+  "vid": 14502,
+  "pid": 10030,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "GALAXY 600",
+  "vid": 14502,
+  "pid": 10500,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "WIN 60 EVO",
+  "vid": 14502,
+  "pid": 10506,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ },
+ {
+  "name": "WIN 68 EVO",
+  "vid": 14502,
+  "pid": 10505,
+  "usage": 1,
+  "page": 65456,
+  "family": "0xFFB0",
+  "wireless": false
+ }
+]
